@@ -9,6 +9,11 @@ pipeline {
             }
         }
         stage("test"){
+            when{
+                expression {
+                    BRANCH_NAME == 'main' || BRANCH_NAME == 'dev'
+                }
+            }
             steps{
                 echo 'testing application...'
             }
@@ -19,9 +24,15 @@ pipeline {
             }
         }
     }
-}
+    post {
+        always{
 
-node {
-    //groovy script
+        }
+        success{
 
+        }
+        failure{
+
+        }
+    }
 }
